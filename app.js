@@ -17,6 +17,9 @@ app.set('views', __dirname + '/views')
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+app.use(require('volleyball'));
+
+
 app.use(express.static(path.join(__dirname, '/node_modules')));
 
 app.get('/', function(req, res, next){
@@ -27,6 +30,11 @@ app.get('/', function(req, res, next){
 			defaultDepartment: defaultDep
 		});
 	});
+});
+
+app.use(function(err, req, res, next) {
+	console.log("Error: ");
+	console.log(err, err.stack);
 });
 
 app.use('/departments', require('./routes/departments'));

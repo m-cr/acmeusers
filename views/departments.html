@@ -15,6 +15,10 @@
 		<div class='well'><h4>This is the default Department.</h4></div>
 	{% endif %}
 
+	{% if onDefault != true %}
+		<button class='btn btn-default'>Make This the Default Department</button>
+	{% endif %}
+
 	<div class='container'>
 		<ul class='nav nav-tabs'>
 			{% for department in departments %}
