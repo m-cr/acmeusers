@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+	<div class='container'>
+		<h1 class='container'>{{title}}</h1>
+		<ul class='nav nav-tabs'>
+			<li><a href='/'>Home</a></li>
+			<li><a href="/departments/{{defaultDepartment.id}}">Departments({{defaultDepartment.name}})</a></li>
+			<li><a href="/customers">Customers</a></li>
+		</ul>
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>

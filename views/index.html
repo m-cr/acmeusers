@@ -1,0 +1,16 @@
+{% extends './layout.html' %}
+
+{% block content %}
+	<!-- <ul class='nav nav-tabs'>
+			<li class='active'><a href='/'>Home</a></li>
+			<li><a href="/departments/{{defaultDepartment.id}}">Departments({{defaultDepartment.name}})</a></li>
+			<li><a href="/customers">Customers</a></li>
+	</ul> -->
+	<h4 class='well'>Welcome to Acme Departments</h4>
+	<div class='form-group'>
+		<form action='/departments' method='POST'>
+			<input type="text" name="newDep" value="Department Name">
+			<button class='btn btn-primary' type="submit">Create Department</button>
+		</form>
+	</div>
+{% endblock %}

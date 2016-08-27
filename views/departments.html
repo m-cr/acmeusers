@@ -1,0 +1,25 @@
+{% extends './layout.html' %}
+
+{% block content %}
+	<div class='well'>
+		<h4>Departments - {{thisDepartment.name}}</h4>
+	</div>
+	<div class='form-group'>
+		<form action='/departments/{{defaultDepartment.id}}' method='POST'>
+			<input type="text" name="employee" value='New Employee'>
+			<button class='btn btn-primary' type="submit">Submit Employee</button>
+		</form>
+	</div>
+
+	{% if onDefault === true %}
+		<div class='well'><h4>This is the default Department.</h4></div>
+	{% endif %}
+
+	<div class='container'>
+		<ul class='nav nav-tabs'>
+			{% for department in departments %}
+				<li><a href="/departments/{{department.id}}">{{department.name}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
