@@ -1,6 +1,6 @@
 var Sequelize = require('Sequelize');
 
-var db = new Sequelize('postgres://localhost/acmedepartments', {logging:false});
+var db = new Sequelize(process.env.DATABASE_URL, {logging:false});
 
 var User = db.define('user', {
 	name: Sequelize.STRING
