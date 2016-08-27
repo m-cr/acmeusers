@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
+    "start": "node server.js",
     "start:dev": "PORT=3000  nodemon -e html,js server.js"
   },
   "author": "",
