@@ -22,7 +22,8 @@ router.get('/:id', function(req, res, next){
 			defaultDepartment: defaultDep,
 			departments: departments,
 			thisDepartment: thisDep,
-			onDefault: thisDep.isDefault
+			onDefault: thisDep.isDefault,
+			tab: 'departments'
 		});
 	})
 	.catch(next);
@@ -37,10 +38,6 @@ router.post('/', function(req, res, next){
 	})
 	.catch(next);
 });
-
-// router.delete('/:depId/employees/:usrId', function(req, res, next){
-// 	User.create({});
-// });
 
 router.post('/:id/employees', function(req, res, next){
 	Department.getDefault()
@@ -63,6 +60,3 @@ router.post('/:id/employees', function(req, res, next){
 
 	res.redirect('/departments/' + req.params.id);
 });
-
-//router.put('/:depId/customers/:usrId')
-//makes employee into customer

@@ -27,7 +27,8 @@ app.get('/', function(req, res, next){
 	.then(function(defaultDep){
 		return res.render('index', {
 			title: 'Acme Departments - Home', 
-			defaultDepartment: defaultDep
+			defaultDepartment: defaultDep,
+			tab: 'home'
 		});
 	});
 });

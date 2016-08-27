@@ -1,9 +1,7 @@
 {% extends './layout.html' %}
 
 {% block content %}
-	<div class='well'>
-		<h4>Departments - {{thisDepartment.name}}</h4>
-	</div>
+	<h4 class='well'>Departments - {{thisDepartment.name}}</h4>
 	<div class='form-group'>
 		<form action='/departments/{{defaultDepartment.id}}' method='POST'>
 			<input type="text" name="employee" value='New Employee'>

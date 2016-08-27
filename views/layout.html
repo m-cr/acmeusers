@@ -8,9 +8,9 @@
 	<div class='container'>
 		<h1 class='container'>{{title}}</h1>
 		<ul class='nav nav-tabs'>
-			<li><a href='/'>Home</a></li>
-			<li><a href="/departments/{{defaultDepartment.id}}">Departments({{defaultDepartment.name}})</a></li>
-			<li><a href="/customers">Customers</a></li>
+			<li {%if tab === 'home' %}class='active'{% endif %}><a href='/'>Home</a></li>
+			<li {%if tab === 'departments' %}class='active'{% endif %}><a href="/departments/{{defaultDepartment.id}}">Departments({{defaultDepartment.name}})</a></li>
+			<li {%if tab === 'customers' %}class='active'{% endif %}><a href="/customers">Customers</a></li>
 		</ul>
 		{% block content %}
 		{% endblock %}
