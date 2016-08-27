@@ -17,7 +17,6 @@ router.get('/:id', function(req, res, next){
 
 	Promise.all([defaultDep, departments, thisDep])
 	.spread(function(defaultDep, departments, thisDep){
-		console.log(thisDep.isDefault);
 		res.render('departments', {
 			title: "Departments",
 			defaultDepartment: defaultDep,
@@ -27,30 +26,6 @@ router.get('/:id', function(req, res, next){
 		});
 	})
 	.catch(next);
-	
-	// Department.findOne({where: {id: req.params.id*1}})
-	// .then(function(foundDep){
-	// 	if(foundDep.isDefault === true){
-	// 		return res.render('departments', {
-	// 			title: 'Departments', 
-	// 			defaultDepartment: foundDep,
-	// 			departments: allDeps,
-	// 			thisDepartment: foundDep, 
-	// 			onDefault: true})
-	// 	};
-
-	// 	return Department.getDefault()
-	// 	.then(function(foundDefault){
-	// 		res.render('departments', {
-	// 			title: 'Departments',
-	// 			defaultDepartment: foundDefault,
-	// 			departments: allDeps,
-	// 			thisDepartment: foundDep,
-	// 			onDefault: false
-	// 		});
-	// 	});
-	// })
-	// .catch(next);
 });
 
 router.post('/', function(req, res, next){
@@ -67,9 +42,27 @@ router.post('/', function(req, res, next){
 // 	User.create({});
 // });
 
-// router.post('/:depId/employees', function(req, res, next){
-	//updates default
-// });
+router.post('/:id/employees', function(req, res, next){
+	Department.getDefault()
+	.then(function(defaultDep){
+		return defaultDep.updateAttributes({
+			isDefault: false
+		})
+	})
+	Department.findOne({
+		where: {
+			id: req.params.id*1
+		}
+	})
+	.then(function(thisDep){
+		return thisDep.updateAttributes({
+			isDefault: true
+		})
+	})
+	.catch(next);
+
+	res.redirect('/departments/' + req.params.id);
+});
 
 //router.put('/:depId/customers/:usrId')
 //makes employee into customer

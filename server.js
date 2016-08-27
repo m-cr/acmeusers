@@ -5,9 +5,9 @@ var User = db.User;
 
 var server = http.createServer(require('./app'));
 
-Department.sync({})
+Department.sync({force:true})
 .then(function(){
-	return User.sync({});
+	return User.sync({force:true});
 })
 .then(function(){
 	server.listen(process.env.PORT, function(){
