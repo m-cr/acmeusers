@@ -3,6 +3,8 @@
 {% block content %}
 	<h4 class='well'>Departments - {{thisDepartment.name}}</h4>
 	<div class='form-group'>
+    <!-- since you are creating an employee- this route should be /departments/:id/employees  -->
+
 		<form action='/departments/{{defaultDepartment.id}}' method='POST'>
 			<input type="text" name="employee" value='New Employee'>
 			<button class='btn btn-primary' type="submit">Submit Employee</button>
@@ -14,6 +16,7 @@
 	{% endif %}
 
 	{% if onDefault != true %}
+    <!-- restful routes- you are editing department /departments/:id -->
 		<form action='/departments/{{thisDepartment.id}}/employees' method='POST'>
 			<input type='submit' class='btn btn-warning' value='Make This the Default Department'>
 		</form>
@@ -23,8 +26,10 @@
 	<div class='container'>
 		<ul class='nav nav-tabs'>
 			{% for department in departments %}
+      <!-- you can hi-lite the selected department -->
 				<a href="/departments/{{department.id}}" class='btn btn-primary'>{{department.name}}</a>
 			{% endfor %}
 		</ul>
+    <!-- show the employees for this department -->
 	</div>
 {% endblock %}

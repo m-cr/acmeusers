@@ -1,5 +1,6 @@
 var Sequelize = require('Sequelize');
 
+//put connection string in a variable
 var db = new Sequelize('postgres://localhost/acmedepartments', {logging:false});
 
 var User = db.define('user', {
@@ -8,7 +9,8 @@ var User = db.define('user', {
 
 var Department = db.define('department', {
 	name: Sequelize.STRING,
-	isDefault: Sequelize.BOOLEAN
+	isDefault: Sequelize.BOOLEAN,
+  defaultValue: false
 }, {
 	classMethods: {
 		getDefault: function(){
@@ -31,6 +33,7 @@ var Department = db.define('department', {
 
 User.belongsTo(Department);
 
+//how about exporting a models property-- this way this module can have other methods as well.
 module.exports = {
 	User: User,
 	Department: Department

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Department = require('../db').Department;
-var User = require('../db').User;
 var Promise = require('bluebird');
 
 module.exports = router;
@@ -39,24 +38,37 @@ router.post('/', function(req, res, next){
 	.catch(next);
 });
 
+/*
+ * router.post('/:id/employees', function(){
+ *  //create a user with the departmenId which is passed;
+ *  //redirect back to department
+ *
+ * });
+ */
+/*
+ * router.delete('/:departmentId/employees/:id', function(){
+ *  //delete the user and redirect to department
+ *
+ * });
+ */
+
+//restful routes-- you're updating department here... no?
+//should be put /:id
 router.post('/:id/employees', function(req, res, next){
 	Department.getDefault()
-	.then(function(defaultDep){
-		return defaultDep.updateAttributes({
-			isDefault: false
-		})
+	.then(function(department){
+    department.isDefault = false;
+    return department.save();
 	})
-	Department.findOne({
-		where: {
-			id: req.params.id*1
-		}
-	})
-	.then(function(thisDep){
-		return thisDep.updateAttributes({
-			isDefault: true
-		})
-	})
+  .then(function(){
+	  return Department.findById(req.params.id);
+  })
+  .then(function(department){
+    department.isDefault = true;
+    return department.save();
+  })
+  .then(function(department){
+	  res.redirect('/departments/' + req.params.id);
+  })
 	.catch(next);
-
-	res.redirect('/departments/' + req.params.id);
 });
